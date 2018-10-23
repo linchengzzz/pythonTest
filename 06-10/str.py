@@ -64,25 +64,38 @@
 #     print('>=: ', set1 >= set3)
 
 
+# def main():
+#     scores = {'111': 10, '222': 20, '333': 30}
+#     print(scores['111'])
+#     print(scores['222'])
+#     for elem in scores:
+#         print('%s\t--->\t%d' % (elem, scores[elem]))
+#     scores['111'] = 60
+#     scores['222'] = 70
+#     scores.update(你好=30, 哈哈=50)
+#     print(scores)
+#     # print(scores['4444'])
+#     print(scores.get('444', 30))
+#     print(scores.get('111', 40))
+#     print(scores)
+#     print(scores.popitem())
+#     print(scores.popitem())
+#     print(scores.pop('111', 3333))
+#     scores.clear()
+#     print(scores)
+
+
+import os
+import time
+
+
 def main():
-    scores = {'111': 10, '222': 20, '333': 30}
-    print(scores['111'])
-    print(scores['222'])
-    for elem in scores:
-        print('%s\t--->\t%d' % (elem, scores[elem]))
-    scores['111'] = 60
-    scores['222'] = 70
-    scores.update(你好=30, 哈哈=50)
-    print(scores)
-    # print(scores['4444'])
-    print(scores.get('444', 30))
-    print(scores.get('111', 40))
-    print(scores)
-    print(scores.popitem())
-    print(scores.popitem())
-    print(scores.pop('111', 3333))
-    scores.clear()
-    print(scores)
+    content = '12345.....'
+    while True:
+        os.system('clear')
+        print(content)
+        time.sleep(0.2)
+        content = content[1:] + content[0]
 
 
 if __name__ == '__main__':
