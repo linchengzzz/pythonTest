@@ -1,4 +1,3 @@
-
 # def main():
 #     str1 = 'hello'
 #     print(str1)
@@ -98,17 +97,33 @@
 #         content = content[1:] + content[0]
 
 
-import random
-def generate_code(code_len = 4):
-    all_chars = '0123456789abcdefghijklmnopqrstuvwxyz'
-    last_pos = len(all_chars) - 1
-    code = ''
-    for _ in range(code_len):
-        index = random.randint(0, last_pos)
-        code += all_chars[index]
-    return code
+# import random
+#
+#
+# def generate_code(code_len=4):
+#     all_chars = '0123456789abcdefghijklmnopqrstuvwxyz'
+#     last_pos = len(all_chars) - 1
+#     code = ''
+#     for _ in range(code_len):
+#         index = random.randint(0, last_pos)
+#         code += all_chars[index]
+#     return code
+#
+#
+# print(generate_code())
 
 
-print(generate_code())
 # if __name__ == '__main__':
 #     main()
+
+
+def get_suffix(filename, has_dot=False):
+    pos = filename.rfind('.')
+    if 0 < pos < len(filename) - 1:
+        index = pos if has_dot else pos + 1
+        return filename[index:]
+    else:
+        return ''
+
+
+print(get_suffix('1.text', True))
