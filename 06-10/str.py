@@ -85,18 +85,30 @@
 #     print(scores)
 
 
-import os
-import time
+# import os
+# import time
 
 
-def main():
-    content = '12345.....'
-    while True:
-        os.system('clear')
-        print(content)
-        time.sleep(0.2)
-        content = content[1:] + content[0]
+# def main():
+#     content = '12345.....'
+#     while True:
+#         os.system('clear')
+#         print(content)
+#         time.sleep(0.2)
+#         content = content[1:] + content[0]
 
 
-if __name__ == '__main__':
-    main()
+import random
+def generate_code(code_len = 4):
+    all_chars = '0123456789abcdefghijklmnopqrstuvwxyz'
+    last_pos = len(all_chars) - 1
+    code = ''
+    for _ in range(code_len):
+        index = random.randint(0, last_pos)
+        code += all_chars[index]
+    return code
+
+
+print(generate_code())
+# if __name__ == '__main__':
+#     main()
