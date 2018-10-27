@@ -129,15 +129,145 @@
 # print(get_suffix('1.text', True))
 
 
-def max2(x):
-    m1, m2 = (x[0], x[1]) if x[0] > x[1] else (x[1], x[0])
-    for index in range(2, len(x)):
-        if x[index] > m1:
-            m2 = m1
-            m1 = x[index]
-        elif x[index] > m2:
-            m2 = x[index]
-    return m1, m2
+# def max2(x):
+#     m1, m2 = (x[0], x[1]) if x[0] > x[1] else (x[1], x[0])
+#     for index in range(2, len(x)):
+#         if x[index] > m1:
+#             m2 = m1
+#             m1 = x[index]
+#         elif x[index] > m2:
+#             m2 = x[index]
+#     return m1, m2
+# 
+#
+# print(max2([1, 2, 3, 4, 5]))
 
 
-print(max2([1, 2, 3, 4, 5]))
+# def is_leap_year(year):
+#     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+
+
+# def which_day(year, month, date):
+#     days_of_month = [
+#         [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+#         [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+#     ][is_leap_year(year)]
+#     total = 0
+#     for index in range(month - 1):
+#         total += days_of_month[index]
+#     return total + date
+
+
+# print(which_day(2018, 9, 10))
+
+
+# def main():
+#     num = int(input('Number of rows: '))
+#     yh = [[]] * num
+#     for row in range(len(yh)):
+#         yh[row] = [None] * (row + 1)
+#         for col in range(len(yh[row])):
+#             if col == 0 or col == row:
+#                 yh[row][col] = 1
+#             else:
+#                 yh[row][col] = yh[row - 1][col] + yh[row - 1][col - 1]
+#             print(yh[row][col], end='\t')
+#         print()
+
+
+# if __name__ == '__main__':
+#     main()
+
+
+# from random import randrange, randint, sample
+
+
+# def display(balls):
+#     for index, ball in enumerate(balls):
+#         if index == len(balls) - 1:
+#             print('|', end=' ')
+#         print('%2d' % ball, end=' ')
+#     print()
+
+
+# def random_select():
+#     red_balls = [x for x in range(1, 34)]
+#     selected_balls = []
+#     selected_balls = sample(red_balls, 6)
+#     selected_balls.sort()
+#     selected_balls.append(randint(1, 16))
+#     return selected_balls
+
+
+# def main():
+#     n = int(input('num: '))
+#     for _ in range(n):
+#         display(random_select())
+
+
+# if __name__ == '__main__':
+#     main()
+
+
+# def main():
+#     persons = [True] * 30
+#     counter, index, number = 0, 0, 0
+#     while counter < 15:
+#         if persons[index]:
+#             number += 1
+#             if number == 9:
+#                 persons[index] = False
+#                 counter += 1
+#                 number = 0
+#         index += 1
+#         index %= 30
+#     for person in persons:
+#         print('ji' if person else 'fw', end=' ')
+ 
+# if __name__ == '__main__':
+#     main()
+
+
+import os
+
+
+def print_board(board):
+    print(board['TL'] + '|' + board['TM'] + '|' + board['TR'])
+    print('-+-+-')
+    print(board['ML'] + '|' + board['MM'] + '|' + board['MR'])
+    print('-+-+-')
+    print(board['BL'] + '|' + board['BM'] + '|' + board['BR'])
+
+
+def main():
+    init_board = {
+        'TL': ' ', 'TM': ' ', 'TR': ' ',
+        'ML': ' ', 'MM': ' ', 'MR': ' ',
+        'BL': ' ', 'BM': ' ', 'BR': ' '
+    }
+    begin = True
+    while begin:
+        curr_board = init_board.copy()
+        begin = False
+        turn = 'x'
+        counter = 0
+        os.system('cls')
+        print_board(curr_board)
+        while counter < 9:
+            move = input('轮到%s走棋，请输入位置：' % turn)
+            if curr_board[move] == ' ':
+                counter += 1
+                curr_board[move] = turn
+                if turn == 'x':
+                    turn = '0'
+                else:
+                    turn = 'x'
+            os.system('cls')
+            print_board(curr_board)
+        choice = input('again ? (yes|no)')
+        begin = choice == 'yes'
+
+
+
+if __name__ == '__main__':
+    main()
