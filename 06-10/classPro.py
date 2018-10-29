@@ -281,7 +281,7 @@ class Fighter(object, metaclass=abc.ABCMeta):
     @property
     def name(self):
         return self._name
-    
+
     @property
     def hp(self):
         return self._hp
@@ -289,7 +289,7 @@ class Fighter(object, metaclass=abc.ABCMeta):
     @hp.setter
     def hp(self, hp):
         self._hp = hp if hp >= 0 else 0
-    
+
     @property
     def alive(self):
         return self._hp > 0
@@ -299,116 +299,291 @@ class Fighter(object, metaclass=abc.ABCMeta):
         pass
 
 
-class Ultraman(Fighter):
-    
-    __slots__ = ('_name', '_hp', '_mp')
+# class Ultraman(Fighter):
 
-    def __init__(self, name, hp, mp):
-        super().__init__(name, hp)
-        self._mp = mp
-    
-    def attack(self, other):
-        other.hp -= random.randint(15, 25)
-    
-    def huge_attack(self, other):
-        if self._mp >= 50:
-            self._mp -= 50
-            injury = other.hp * 3//4
-            injury = injury if injury >= 50 else 50
-            other.hp -= injury
-            return True
-        else:
-            self.attack(other)
-            return False
+#     __slots__ = ('_name', '_hp', '_mp')
 
-    def magic_attack(self, others):
-        if self._mp >= 20:
-            self._mp -= 20
-            for temp in others:
-                if temp.alive:
-                    temp.hp -= random.randint(10, 15)
-            return True
-        else:
-            return False
-    
-    def resume(self):
-        inc_point = random.randint(1, 10)
-        self._mp += inc_point
-        return inc_point
+#     def __init__(self, name, hp, mp):
+#         super().__init__(name, hp)
+#         self._mp = mp
 
-    def __str__(self):
-        return '~~~ %s ATM ~~~\n' % self._name + 'HP: %d\n' % self._hp + 'MP: %d\n' % self._mp
+#     def attack(self, other):
+#         other.hp -= random.randint(15, 25)
 
+#     def huge_attack(self, other):
+#         if self._mp >= 50:
+#             self._mp -= 50
+#             injury = other.hp * 3//4
+#             injury = injury if injury >= 50 else 50
+#             other.hp -= injury
+#             return True
+#         else:
+#             self.attack(other)
+#             return False
 
-class Monster(Fighter):
+#     def magic_attack(self, others):
+#         if self._mp >= 20:
+#             self._mp -= 20
+#             for temp in others:
+#                 if temp.alive:
+#                     temp.hp -= random.randint(10, 15)
+#             return True
+#         else:
+#             return False
 
-    __slots__ = ('_name', '_hp')
+#     def resume(self):
+#         inc_point = random.randint(1, 10)
+#         self._mp += inc_point
+#         return inc_point
 
-    def attack(self, other):
-        other.hp -= random.randint(10, 30)
-    
-    def __str__(self):
-        return '~~~ %s LitterMonster ~~~\n' % self._name + 'HP: %d\n' % self._hp
+#     def __str__(self):
+#         return '~~~ %s ATM ~~~\n' % self._name + 'HP: %d\n' % self._hp + 'MP: %d\n' % self._mp
 
 
-def is_any_alive(monsters):
-    for monster in monsters:
-        if monster.alive > 0:
-            return True
-    return False
+# class Monster(Fighter):
+
+#     __slots__ = ('_name', '_hp')
+
+#     def attack(self, other):
+#         other.hp -= random.randint(10, 30)
+
+#     def __str__(self):
+#         return '~~~ %s LitterMonster ~~~\n' % self._name + 'HP: %d\n' % self._hp
 
 
-def select_alive_one(monsters):
-    monsters_len = len(monsters)
-    while True:
-        index = random.randrange(monsters_len)
-        monster = monsters[index]
-        if monster.alive > 0:
-            return monster
+# def is_any_alive(monsters):
+#     for monster in monsters:
+#         if monster.alive > 0:
+#             return True
+#     return False
 
 
-def display_info(ultraman, monsters):
-    print(ultraman)
-    for monster in monsters:
-        print(monster, end=' ')
+# def select_alive_one(monsters):
+#     monsters_len = len(monsters)
+#     while True:
+#         index = random.randrange(monsters_len)
+#         monster = monsters[index]
+#         if monster.alive > 0:
+#             return monster
+
+
+# def display_info(ultraman, monsters):
+#     print(ultraman)
+#     for monster in monsters:
+#         print(monster, end=' ')
+
+
+# def main():
+#     u = Ultraman('zcl', 1000, 120)
+#     m1 = Monster('dd', 250)
+#     m2 = Monster('bb', 500)
+#     m3 = Monster('ww', 750)
+#     ms = [m1, m2, m3]
+#     fight_round = 1
+#     while u.alive and is_any_alive(ms):
+#         print('======== 第%02d回合 =======' % fight_round)
+#         m = select_alive_one(ms)
+#         skill = random.randint(1, 10)
+#         if skill <= 6:
+#             print('%s uis attack %s.' % (u.name, m.name))
+#             u.attack(m)
+#             print('%s resume magic %d.' % (u.name, u.resume()))
+#         elif skill <= 9:
+#             if u.magic_attack(ms):
+#                 print('%s use magic attack' % u.name)
+#             else:
+#                 print('%s use magic attack failed' % u.name)
+#         else:
+#             if u.huge_attack(m):
+#                 print('%s use huge attack %s.' % (u.name, m.name))
+#             else:
+#                 print('%s use attack %s.' % (u.name, m.name))
+#                 print('%s resume magic %d.' % (u.name, u.resume()))
+#         if m.alive > 0:
+#             print('%s return attack %s.' % (m.name, u.name))
+#             m.attack(u)
+#         display_info(u, ms)
+#         fight_round += 1
+#     print('\n======= Fight End! =======\n')
+#     if u.alive > 0:
+#         print('%s ultraman is win!' % u.name)
+#     else:
+#         print('monsters is win!')
+
+
+# if __name__ == '__main__':
+#     main()
+
+
+# import random
+
+
+# class Card(object):
+
+#     def __init__(self, suite, face):
+#         self._suite = suite
+#         self._face = face
+
+#     @property
+#     def face(self):
+#         return self._face
+
+#     @property
+#     def suite(self):
+#         return self._suite
+
+#     def __str__(self):
+#         if self._face == 1:
+#             face_str = 'A'
+#         elif self._face == 11:
+#             face_str = 'J'
+#         elif self._face == 12:
+#             face_str = 'Q'
+#         elif self._face == 13:
+#             face_str = 'K'
+#         else:
+#             face_str = str(self._face)
+#         return '%s%s' % (self._suite, face_str)
+
+#     def __repr__(self):
+#         return self.__str__()
+
+
+# class Poker(object):
+
+#     def __init__(self):
+#         self._cards = [Card(suite, face)
+#                         for suite in '♠♥♣♦'
+#                         for face in range(1, 14)]
+#         self._current = 0
+
+#     @property
+#     def cards(self):
+#         return self._cards
+
+#     def shuffle(self):
+#         self._current = 0
+#         random.shuffle(self._cards)
+
+#     @property
+#     def next(self):
+#         card = self._cards[self._current]
+#         self._current += 1
+#         return card
+
+#     @property
+#     def has_next(self):
+#         return self._current < len(self._cards)
+
+# class Player(object):
+
+#     def __init__(self, name):
+#         self._name = name
+#         self._cards_on_hand = []
+
+#     @property
+#     def name(self):
+#         return self._name
+
+#     @property
+#     def cards_on_hand(self):
+#         return self._cards_on_hand
+
+#     def get(self, card):
+#         self._cards_on_hand.append(card)
+
+#     def arrange(self, card_key):
+#         self._cards_on_hand.sort(key=card_key)
+
+
+# def get_key(card):
+#     return (card.suite, card.face)
+
+
+# def main():
+#     p = Poker()
+#     p.shuffle()
+#     players = [Player('E'), Player('W'), Player('N'), Player('S')]
+#     for _ in range(13):
+#         for player in players:
+#             player.get(p.next)
+#     for player in players:
+#         print(player.name + ':', end=' ')
+#         player.arrange(get_key)
+#         print(player.cards_on_hand)
+
+
+# if __name__ == '__main__':
+#     main()
+
+
+class Employee(object, metaclass=abc.ABCMeta):
+
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    @abc.abstractmethod
+    def get_salary(self):
+        pass
+
+
+class Manager(Employee):
+
+    def get_salary(self):
+        return 15000.0
+
+
+class Programmer(Employee):
+
+    def __init__(self, name, working_hour=0):
+        super().__init__(name)
+        self._working_hour = working_hour
+
+    @property
+    def working_hour(self):
+        return self._working_hour
+
+    @working_hour.setter
+    def working_hour(self, working_hour):
+        self._working_hour = working_hour if working_hour > 0 else 0
+
+    def get_salary(self):
+        return 150.0 * self._working_hour
+
+
+class Salesman(Employee):
+
+    def __init__(self, name, sales=0):
+        super().__init__(name)
+        self._sales = sales
+
+    @property
+    def sales(self):
+        return self._sales
+
+    @sales.setter
+    def sales(self, sales):
+        self._sales = sales if sales > 0 else 0
+
+    def get_salary(self):
+        return 1200.0 + self._sales * 0.85
 
 
 def main():
-    u = Ultraman('zcl', 1000, 120)
-    m1 = Monster('dd', 250)
-    m2 = Monster('bb', 500)
-    m3 = Monster('ww', 750)
-    ms = [m1, m2, m3]
-    fight_round = 1
-    while u.alive and is_any_alive(ms):
-        print('======== 第%02d回合 =======' % fight_round)
-        m = select_alive_one(ms)
-        skill = random.randint(1, 10)
-        if skill <= 6:
-            print('%s uis attack %s.' % (u.name, m.name))
-            u.attack(m)
-            print('%s resume magic %d.' % (u.name, u.resume()))
-        elif skill <= 9:
-            if u.magic_attack(ms):
-                print('%s use magic attack' % u.name)
-            else:
-                print('%s use magic attack failed' % u.name)
-        else:
-            if u.huge_attack(m):
-                print('%s use huge attack %s.' % (u.name, m.name))
-            else:
-                print('%s use attack %s.' % (u.name, m.name))
-                print('%s resume magic %d.' % (u.name, u.resume()))
-        if m.alive > 0:
-            print('%s return attack %s.' % (m.name, u.name))
-            m.attack(u)
-        display_info(u, ms)
-        fight_round += 1
-    print('\n======= Fight End! =======\n')
-    if u.alive > 0:
-        print('%s ultraman is win!' % u.name)
-    else:
-        print('monsters is win!')
+    emps = [Manager('lb'), Programmer('vgl'), Manager('cc'), Salesman(
+        'xy'), Salesman('lb'), Programmer('zl'), Programmer('zy')]
+    for emp in emps:
+        if isinstance(emp, Programmer):
+            emp.working_hour = int(
+                input('please input %s\'s time word in month: ' % emp.name))
+        elif isinstance(emp, Salesman):
+            emp.sales = float(
+                input('please input %s\'s sales in month: ' % emp.name))
+        print('%s money in month is $%s' % (emp.name, emp.get_salary()))
 
 
 if __name__ == '__main__':
