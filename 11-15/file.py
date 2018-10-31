@@ -75,3 +75,14 @@ def main():
                     fs_list[1].write(str(number) + '\n')
                 else:
                     fs_list[2].write(str(number) + '\n')
+    except IOError as ex:
+        print(ex)
+        print('write file error')
+    finally:
+        for fs in fs_list:
+            fs.close()
+    print('final end')
+
+
+if __name__ == '__main__':
+    main()
