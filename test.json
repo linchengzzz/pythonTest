@@ -1,0 +1,7 @@
+{
+    "name": "zcl",
+    "age": 20,
+    "qq": 123456,
+    "friends": ["1", "2"],
+    "cards": [{ "brand": "Byd", "speed": 180 }, { "brand": "Audi", "speed": 289 }, { "brand": "Benz", "speed": 389 }]
+}
