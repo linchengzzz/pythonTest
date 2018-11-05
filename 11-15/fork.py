@@ -21,30 +21,53 @@
 #     main()
 
 
+# import multiprocessing
+# import os
+# import random
+# import time
+
+
+# def download_task(filename):
+#     print('启动下载，进程号为[%d].' % os.getpid())
+#     print('开始下载%s...' % filename)
+#     time_to_download = random.randint(5, 10)
+#     time.sleep(time_to_download)
+#     print('%s下载完成，总共耗时%d秒' % (filename, time_to_download))
+
+
+# def main():
+#     start = time.time()
+#     p1 = multiprocessing.Process(target=download_task, args=('python.pdf', ))
+#     p1.start()
+#     p2 = multiprocessing.Process(target=download_task, args=('pk.avi', ))
+#     p2.start()
+#     p1.join()
+#     p2.join()
+#     end = time.time()
+#     print('总共耗时%.2f秒' % (end - start))
+
+
+# if __name__ == '__main__':
+#     main()
+
+
 import multiprocessing
-import os
-import random
 import time
 
+counter = 0
 
-def download_task(filename):
-    print('启动下载，进程号为[%d].' % os.getpid())
-    print('开始下载%s...' % filename)
-    time_to_download = random.randint(5, 10)
-    time.sleep(time_to_download)
-    print('%s下载完成，总共耗时%d秒' % (filename, time_to_download))
+
+def sub_task(string):
+    global counter
+    while counter < 10:
+        print(string, end=' ', flush=True)
+        counter += 1
+        time.sleep(0.1)
 
 
 def main():
-    start = time.time()
-    p1 = multiprocessing.Process(target=download_task, args=('python.pdf', ))
-    p1.start()
-    p2 = multiprocessing.Process(target=download_task, args=('pk.avi', ))
-    p2.start()
-    p1.join()
-    p2.join()
-    end = time.time()
-    print('总共耗时%.2f秒' % (end - start))
+    multiprocessing.Process(target=sub_task, args=('Ping', )).start()
+    multiprocessing.Process(target=sub_task, args=('Pong', )).start()
 
 
 if __name__ == '__main__':
